@@ -1,1 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Build SOP</title>
+  <link rel="icon" href="spm.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Noto+Sans+Bengali:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-obsidian: #070b14;
+      --bg-navy: #0e1628;
+      --surface-glass: linear-gradient(145deg, rgba(22, 33, 56, 0.72), rgba(11, 17, 30, 0.88));
+      --surface-inset: rgba(5, 9, 18, 0.55);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-gloss: rgba(255, 255, 255, 0.16);
+      --gold-primary: #d4af37;
+      --gold-light: #f3d98b;
+      --gold-glow: rgba(212, 175, 55, 0.18);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --shadow-card: 0 24px 48px -12px rgba(0, 0, 0, 0.65), inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+      --shadow-hover: 0 12px 28px -8px rgba(212, 175, 55, 0.22), inset 0 1px 0 0 rgba(243, 217, 139, 0.25);
+    }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans Bengali', sans-serif;
+      background-color: var(--bg-obsidian);
+      background-image: 
+        radial-gradient(circle at 18% 0%, rgba(29, 78, 216, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 85% 15%, rgba(212, 175, 55, 0.1) 0%, transparent 40%),
+        linear-gradient(180deg, var(--bg-navy) 0%, var(--bg-obsidian) 100%);
+      background-attachment: fixed;
+      color: var(--text-primary);
+      line-height: 1.65;
+      padding: 56px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 840px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+      position: relative;
+    }
+
+    header::after {
+      content: "";
+      display: block;
+      width: 72px;
+      height: 3px;
+      margin: 18px auto 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, var(--gold-primary), var(--gold-light), var(--gold-primary), transparent);
+    }
+
+    h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 2.6rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      background: linear-gradient(180deg, #ffffff 25%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+      line-height: 1.2;
+      filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.45));
+    }
+
+    .content-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .card {
+      position: relative;
+      background: var(--surface-glass);
+      border: 1px solid var(--border-subtle);
+      border-top-color: var(--border-gloss);
+      border-radius: 20px;
+      padding: 28px 34px;
+      box-shadow: var(--shadow-card);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+      pointer-events: none;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .step-badge {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      height: 30px;
+      padding: 0 10px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.22), rgba(212, 175, 55, 0.06));
+      border: 1px solid rgba(212, 175, 55, 0.38);
+      color: var(--gold-light);
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.02em;
+    }
+
+    .section-title {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans Bengali', sans-serif;
+      font-size: 1.08rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: #f8fafc;
+    }
+
+    .link-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .link-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.7) 0%, rgba(7, 11, 20, 0.85) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-top-color: rgba(255, 255, 255, 0.15);
+      padding: 15px 20px;
+      border-radius: 12px;
+      color: #f1f5f9;
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      word-break: break-all;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .link-item:hover {
+      border-color: rgba(212, 175, 55, 0.55);
+      background: linear-gradient(180deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .link-icon {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--gold-light);
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.25s ease;
+    }
+
+    .link-item:hover .link-icon {
+      background: var(--gold-primary);
+      border-color: var(--gold-light);
+      color: #070b14;
+      transform: translate(2px, -2px);
+    }
+
+    .footer {
+      margin-top: 68px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.84rem;
+      letter-spacing: 0.02em;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 32px;
+      width: 100%;
+      padding-bottom: 24px;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 36px 14px;
+      }
+
+      h1 {
+        font-size: 1.95rem;
+      }
+
+      .card {
+        padding: 22px 18px;
+        border-radius: 16px;
+      }
+
+      .section-header {
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .section-title {
+        font-size: 1rem;
+      }
+
+      .link-item {
+        padding: 13px 15px;
+        font-size: 0.83rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Build SOP</h1>
+    </header>
+
+    <main class="content-stack">
+      <!-- [1] ছাত্রছাত্রীদের জন্য -->
+      <section class="card">
+        <div class="section-header">
+          <span class="step-badge">[1]</span>
+          <h2 class="section-title">ছাত্রছাত্রীদের জন্য</h2>
+        </div>
+        <div class="link-group">
+          <a class="link-item" href="https://spmhqo.github.io/sop/tpp.html" target="_blank" rel="noopener noreferrer">
+            <span>https://spmhqo.github.io/sop/tpp.html</span>
+            <span class="link-icon">&#8599;</span>
+          </a>
+          <a class="link-item" href="https://spmhqo.github.io/sop/tppfu.html" target="_blank" rel="noopener noreferrer">
+            <span>https://spmhqo.github.io/sop/tppfu.html</span>
+            <span class="link-icon">&#8599;</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- [2] Keyword -->
+      <section class="card">
+        <div class="section-header">
+          <span class="step-badge">[2]</span>
+          <h2 class="section-title">Keyword</h2>
+        </div>
+        <div class="link-group">
+          <a class="link-item" href="https://spmhqo.github.io/sop/actual-paras-pathar.html" target="_blank" rel="noopener noreferrer">
+            <span>https://spmhqo.github.io/sop/actual-paras-pathar.html</span>
+            <span class="link-icon">&#8599;</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- [3] Headline -->
+      <section class="card">
+        <div class="section-header">
+          <span class="step-badge">[3]</span>
+          <h2 class="section-title">Headline</h2>
+        </div>
+        <div class="link-group">
+          <a class="link-item" href="https://spmhqo.github.io/sop/actual-paras-pathar.html" target="_blank" rel="noopener noreferrer">
+            <span>https://spmhqo.github.io/sop/actual-paras-pathar.html</span>
+            <span class="link-icon">&#8599;</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- [4] Other's Post -->
+      <section class="card">
+        <div class="section-header">
+          <span class="step-badge">[4]</span>
+          <h2 class="section-title">Other's Post</h2>
+        </div>
+        <div class="link-group">
+          <a class="link-item" href="https://spmhqo.github.io/sop/reply-genie.html" target="_blank" rel="noopener noreferrer">
+            <span>https://spmhqo.github.io/sop/reply-genie.html</span>
+            <span class="link-icon">&#8599;</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- [5] Reader's Question -->
+      <section class="card">
+        <div class="section-header">
+          <span class="step-badge">[5]</span>
+          <h2 class="section-title">Reader's Question</h2>
+        </div>
+        <div class="link-group">
+          <a class="link-item" href="https://spmhqo.github.io/sop/reply-genie.html" target="_blank" rel="noopener noreferrer">
+            <span>https://spmhqo.github.io/sop/reply-genie.html</span>
+            <span class="link-icon">&#8599;</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- [6] Other's Post -->
+      <section class="card">
+        <div class="section-header">
+          <span class="step-badge">[6]</span>
+          <h2 class="section-title">Other's Post</h2>
+        </div>
+        <div class="link-group">
+          <a class="link-item" href="https://spmhqo.github.io/sop/idea-gameplan-process.html" target="_blank" rel="noopener noreferrer">
+            <span>https://spmhqo.github.io/sop/idea-gameplan-process.html</span>
+            <span class="link-icon">&#8599;</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+</body>
+</html>
