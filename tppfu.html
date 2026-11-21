@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tumi Parash Pathar Follow-up</title>
+  <link rel="icon" href="spm.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&family=Source+Code+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-base: #040812;
+      --bg-navy: #0a1326;
+      --card-border: rgba(255, 255, 255, 0.11);
+      --card-border-top: rgba(255, 255, 255, 0.26);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --gold-primary: #dfc068;
+      --gold-light: #f6e3a6;
+      --gold-border: rgba(223, 192, 104, 0.42);
+      --sapphire-bright: #3b82f6;
+      --sapphire-mid: #2563eb;
+      --sapphire-deep: #1d4ed8;
+      --sapphire-glow: rgba(37, 99, 235, 0.38);
+      --emerald-mid: #059669;
+      --emerald-deep: #047857;
+      --well-bg: rgba(3, 7, 18, 0.68);
+      --shadow-card: 0 24px 50px -14px rgba(0, 0, 0, 0.78), 0 0 0 1px rgba(255, 255, 255, 0.04);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-base);
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(37, 99, 235, 0.24), transparent 70%),
+        radial-gradient(ellipse 55% 40% at 88% 10%, rgba(223, 192, 104, 0.1), transparent 65%),
+        radial-gradient(ellipse 65% 50% at 12% 92%, rgba(29, 78, 216, 0.16), transparent 70%),
+        linear-gradient(160deg, #040812 0%, #0a1326 52%, #050a15 100%);
+      background-attachment: fixed;
+      color: var(--text-primary);
+      line-height: 1.6;
+      padding: 60px 20px 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Subtle executive architectural grid */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse at center, black 25%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 25%, transparent 80%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 920px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+
+    h1 {
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      font-size: 2.9rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.22;
+      margin-bottom: 10px;
+      background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 65%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.55));
+    }
+
+    .sub-header {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      letter-spacing: 0.03em;
+      opacity: 0.94;
+    }
+
+    .header-divider {
+      width: 130px;
+      height: 2px;
+      margin: 20px auto 0;
+      background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+      opacity: 0.78;
+    }
+
+    .prompt-workflow {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    #promptsContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .step-card {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(
+        155deg,
+        rgba(34, 49, 82, 0.56) 0%,
+        rgba(14, 23, 44, 0.86) 52%,
+        rgba(7, 13, 27, 0.95) 100%
+      );
+      border: 1px solid var(--card-border);
+      border-top: 1px solid var(--card-border-top);
+      border-radius: 22px;
+      padding: 32px 34px;
+      box-shadow:
+        var(--shadow-card),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    /* Glossy top-glass sheen */
+    .step-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 95px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .step-card:hover {
+      border-color: rgba(223, 192, 104, 0.28);
+      box-shadow:
+        0 28px 56px -14px rgba(0, 0, 0, 0.85),
+        0 0 0 1px rgba(223, 192, 104, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.24);
+    }
+
+    .step-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      gap: 12px;
+    }
+
+    .step-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      background: linear-gradient(180deg, rgba(223, 192, 104, 0.2) 0%, rgba(180, 140, 45, 0.08) 100%);
+      border: 1px solid var(--gold-border);
+      padding: 6px 15px;
+      border-radius: 8px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 4px 12px rgba(0, 0, 0, 0.28);
+    }
+
+    .step-label::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold-light);
+      box-shadow: 0 0 8px var(--gold-primary);
+      flex-shrink: 0;
+    }
+
+    .prompt-content {
+      background: var(--well-bg);
+      padding: 24px;
+      border-radius: 14px;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem;
+      color: #dbeafe;
+      white-space: pre-wrap;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 22px;
+      line-height: 1.65;
+      word-break: break-word;
+      max-height: 520px;
+      overflow-y: auto;
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.55);
+    }
+
+    .prompt-content::-webkit-scrollbar { width: 8px; }
+    .prompt-content::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.25); border-radius: 4px; }
+    .prompt-content::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.25); border-radius: 4px; }
+    .prompt-content::-webkit-scrollbar-thumb:hover { background: rgba(223, 192, 104, 0.45); }
+
+    .btn {
+      position: relative;
+      overflow: hidden;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.96rem;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+      width: 100%;
+      text-decoration: none;
+    }
+
+    .copy-btn {
+      background: linear-gradient(180deg, rgba(59, 130, 246, 0.32) 0%, rgba(29, 78, 216, 0.22) 100%);
+      color: #dbeafe;
+      border: 1px solid rgba(96, 165, 250, 0.38);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        0 6px 18px rgba(0, 0, 0, 0.32);
+    }
+
+    .copy-btn::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 100%);
+      pointer-events: none;
+    }
+
+    .copy-btn:hover {
+      background: linear-gradient(180deg, #3b82f6 0%, #1d4ed8 100%);
+      border-color: rgba(246, 227, 166, 0.62);
+      color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow:
+        0 10px 24px var(--sapphire-glow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    }
+
+    .copy-btn:active {
+      transform: translateY(0);
+    }
+
+    .copy-btn.copied {
+      background: linear-gradient(180deg, #10b981 0%, #047857 100%);
+      border-color: rgba(167, 243, 208, 0.65);
+      color: #ffffff;
+      box-shadow:
+        0 10px 24px rgba(16, 185, 129, 0.38),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    }
+
+    .footer {
+      margin-top: 64px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.84rem;
+      letter-spacing: 0.02em;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 30px;
+      width: 100%;
+      max-width: 920px;
+      padding-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 36px 14px 32px; }
+      h1 { font-size: 2rem; }
+      .sub-header { font-size: 1rem; }
+      .step-card { padding: 22px 18px; border-radius: 18px; }
+      .prompt-content { padding: 18px; font-size: 0.84rem; }
+      .btn { padding: 13px 20px; font-size: 0.92rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Tumi Parash Pathar Follow-up</h1>
+      <p class="sub-header">(ছাত্রছাত্রীদের জন্য)</p>
+      <div class="header-divider"></div>
+    </header>
+
+    <div class="prompt-workflow">
+      <!-- Prompt Result Cards -->
+      <div id="promptsContainer">
+        <!-- Prompts injected by JavaScript -->
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const templates = [
+      {
+        id: 1,
+        text: `এই প্রম্পটগুলো সহ এই উত্তরটা তুমি একটা ফেসবুক পোস্টের ফর্ম্যাটে ও রেডি-টু-পাবলিশ করে লিখে দাও।
+Strict Rules:
+১, এই উত্তরটি কলকাতার রোজকার আড্ডা বা ঘরোয়া কথাবার্তার মতো আরও সহজ ও আন্তরিক ভাষায় লিখে দাও।
+- Always address the reader as "তুমি".
+- Never use "আপনি" or "তুই".`
+      },
+      {
+        id: 2,
+        text: `উত্তরটা codebox-এ দাও, যাতে আমি কপি-ও-পেস্ট করে পোস্টটা সরাসরি ফেসবুকে পাবলিশ করতে পারি।`
+      }
+    ];
+
+    function createCards() {
+      const container = document.getElementById('promptsContainer');
+      container.innerHTML = '';
+      templates.forEach(t => {
+        const card = document.createElement('div');
+        card.className = 'step-card';
+        card.innerHTML = `
+          <div class="step-header">
+            <span class="step-label">Prompt #${t.id}</span>
+          </div>
+          <div class="prompt-content" id="p${t.id}"></div>
+          <button class="btn copy-btn" onclick="copyText('p${t.id}', this)">
+            <span>Copy Prompt #${t.id}</span>
+          </button>
+        `;
+        container.appendChild(card);
+        document.getElementById(`p${t.id}`).innerText = t.text;
+      });
+    }
+
+    function copyText(id, btn) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = `<span>Copied to Clipboard!</span>`;
+        btn.classList.add('copied');
+        
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    // Initialize on page load
+    window.onload = () => {
+      createCards();
+    };
+  </script>
+</body>
+</html>
